@@ -1,0 +1,29 @@
+<h1>Salaries</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Employee ID</th>
+      <th>Basic Salary</th>
+      <th>Overtime Salary</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @salaries.each do |salary| %>
+      <tr>
+        <td><%= salary.employee_id %></td>
+        <td><%= salary.basic_salary %></td>
+        <td><%= salary.overtime_salary %></td>
+        <td><%= link_to 'Show', salary %></td>
+        <td><%= link_to 'Edit', edit_salary_path(salary) %></td>
+        <td><%= link_to 'Destroy', salary, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Salary', new_salary_path %>
