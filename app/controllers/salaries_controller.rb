@@ -1,51 +1,27 @@
 class SalariesController < ApplicationController
-    before_action :set_salary, only: %i[show edit update destroy]
-  
-    def index
-      @salaries = Salary.all
-    end
-  
-    def show
-    end
-  
-    def new
-      @salary = Salary.new
-    end
-  
-    def create
-      @salary = Salary.new(salary_params)
-  
-      if @salary.save
-        redirect_to @salary, notice: 'Salary was successfully created.'
-      else
-        render :new
-      end
-    end
-  
-    def edit
-    end
-  
-    def update
-      if @salary.update(salary_params)
-        redirect_to @salary, notice: 'Salary was successfully updated.'
-      else
-        render :edit
-      end
-    end
-  
-    def destroy
-      @salary.destroy
-      redirect_to salaries_url, notice: 'Salary was successfully destroyed.'
-    end
-  
-    private
-  
-    def set_salary
-      @salary = Salary.find(params[:id])
-    end
-  
-    def salary_params
-      params.require(:salary).permit(:employee_id, :basic_salary, :overtime_salary)
-    end
+  def index
+    @salaries = Salary.all
+    @employees = Employee.all
   end
   
+  def calculate_salaries
+    base_rate = session[:base_rate] || 1000 
+    start_date = Date.parse(params[:start_date])
+    end_date = Date.parse(params[:end_date])
+    
+    Employee.all.each do |employee|
+      employee.calculate_salary(start_date, end_date)
+    end
+    
+    redirect_to salaries_path, notice: '給与が計算されました'
+  end
+
+  def edit_base_rate
+    @base_rate = session[:base_rate] || 1000
+  end
+
+  def update_base_rate
+    session[:base_rate] = params[:base_rate].to_i
+    redirect_to salaries_path
+  end
+end

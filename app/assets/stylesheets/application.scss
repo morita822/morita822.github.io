@@ -1,6 +1,7 @@
 /*
  *= require_tree .
  *= require_self
+ *= require simple_calendar
  */
 
 // リセットCSS
@@ -187,5 +188,7 @@
   margin-top: 1rem;
 }
 
+
+@import "simple_calendar";
 
 

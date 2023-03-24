@@ -1,0 +1,63 @@
+// Variables
+$navbar-color: #72e2d0;
+$navbar-text-color: #ffffff;
+$primary-color: #4c51bf;
+$secondary-color: #718096;
+$background-color: #edf2f7;
+
+// General
+body {
+  background-color: $background-color;
+  font-family: 'Nunito', sans-serif;
+}
+
+.container {
+  max-width: 1140px;
+}
+
+// Navbar
+.navbar {
+  background-color: $navbar-color;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand,
+.nav-link {
+  color: $navbar-text-color;
+}
+
+.nav-link:hover {
+  color: darken($navbar-text-color, 10%);
+}
+
+// Tables
+table {
+  width: 100%;
+  margin-bottom: 1rem;
+  color: $secondary-color;
+  border-collapse: collapse;
+}
+
+th {
+  font-weight: bold;
+  border-bottom: 2px solid $secondary-color;
+}
+
+td,
+th {
+  padding: 0.75rem;
+  vertical-align: top;
+  border-top: 1px solid $secondary-color;
+}
+
+// Buttons
+.btn-primary {
+  background-color: $primary-color;
+  border-color: $primary-color;
+  color: $navbar-text-color;
+
+  &:hover {
+    background-color: darken($primary-color, 10%);
+    border-color: darken($primary-color, 10%);
+  }
+}

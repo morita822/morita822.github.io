@@ -1,19 +1,22 @@
 class AttendancesController < ApplicationController
-  before_action :set_user
+  before_action :set_employee, only: [:index, :show, :edit, :update, :destroy]
   before_action :set_attendance, only: [:edit, :update, :approve]
 
   def index
-    @attendances = @empoyee.attendances.on_this_month.order(:worked_on)
+    @attendances = @employee.attendances.on_this_month.order(:worked_on)
+  end
+
+  def show
   end
 
   def new
-    @attendance = @empoyee.attendances.build(worked_on: Date.current)
+    @attendance = @employee.attendances.build(worked_on: Date.current)
   end
 
   def create
-    @attendance = @empoyee.attendances.build(attendance_params)
+    @attendance = @employee.attendances.build(attendance_params)
     if @attendance.save
-      redirect_to user_attendances_path(@empoyee), notice: '出勤時刻を登録しました。'
+      redirect_to user_attendances_path(@employee), notice: '出勤時刻を登録しました。'
     else
       render :new
     end
@@ -24,7 +27,7 @@ class AttendancesController < ApplicationController
 
   def update
     if @attendance.update(attendance_params)
-      redirect_to user_attendances_path(@empoyee), notice: '勤怠情報を更新しました。'
+      redirect_to employee_attendances_path(@employee), notice: '勤怠情報を更新しました。'
     else
       render :edit
     end
@@ -32,13 +35,13 @@ class AttendancesController < ApplicationController
 
   def approve
     @attendance.update(approved_at: Time.current)
-    redirect_to user_attendances_path(@empoyee), notice: '承認しました。'
+    redirect_to employee_attendances_path(@employee), notice: '承認しました。'
   end
 
   private
 
   def set_employee
-    @empoyee = Empoyee.find(params[:empoyee_id])
+    @employee = Employee.find(params[:employee_id])
   end
 
   def set_attendance
@@ -49,5 +52,8 @@ class AttendancesController < ApplicationController
     params.require(:attendance).permit(:status, :worked_on, :note)
   end
 end
+
+<%= link_to "Attendance List", employee_attendances_path(@employee) %>
+
 
   

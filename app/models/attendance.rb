@@ -1,5 +1,5 @@
 class Attendance < ApplicationRecord
-    belongs_to :user
+    belongs_to :employee
   
     enum status: { check_in: 1, check_out: 2 }
   

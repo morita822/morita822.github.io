@@ -1,31 +1,13 @@
 <h1>Shifts</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Employee ID</th>
-      <th>Date</th>
-      <th>Start Time</th>
-      <th>End Time</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @shifts.each do |shift| %>
-      <tr>
-        <td><%= shift.employee_id %></td>
-        <td><%= shift.date %></td>
-        <td><%= shift.start_time %></td>
-        <td><%= shift.end_time %></td>
-        <td><%= link_to 'Show', shift %></td>
-        <td><%= link_to 'Edit', edit_shift_path(shift) %></td>
-        <td><%= link_to 'Destroy', shift, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
 <%= link_to 'New Shift', new_shift_path %>
+
+<%= month_calendar attribute: :date, date: @date do |date| %>
+  <% shifts = @shifts_by_date[date] %>
+  <% if shifts %>
+    <% shifts.each do |shift| %>
+      <%= link_to shift.employee.name, edit_shift_path(shift) %>
+      <br>
+    <% end %>
+  <% end %>
+<% end %>

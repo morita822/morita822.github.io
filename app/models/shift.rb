@@ -1,2 +1,4 @@
 class Shift < ApplicationRecord
-end
+    belongs_to :employee
+  end
+  
