@@ -1,29 +1,21 @@
 Rails.application.routes.draw do
+  resources :employees do
+    resources :attendances
+  end
+
   resources :salaries do
     collection do
       post 'calculate_salaries'
-    end
-  end
-  
-  resources :salaries do
-    collection do
       get 'edit_base_rate'
       patch 'update_base_rate'
     end
   end
 
-  resources :employees do
-    resources :attendances
-  end  
-  
-  root 'shifts#index'
-  resources :employees
   resources :shifts
-  resources :salaries
+  root 'shifts#index'
   resources :attendances
-  resources :layouts
 end
-  
+
   
   
 

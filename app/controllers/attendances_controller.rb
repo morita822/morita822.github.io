@@ -1,5 +1,5 @@
 class AttendancesController < ApplicationController
-  before_action :set_employee, only: [:index, :show, :edit, :update, :destroy]
+  before_action :set_employee, only: [:index, :show, :edit, :update, :destroy, :new, :create]
   before_action :set_attendance, only: [:edit, :update, :approve]
 
   def index
@@ -16,7 +16,7 @@ class AttendancesController < ApplicationController
   def create
     @attendance = @employee.attendances.build(attendance_params)
     if @attendance.save
-      redirect_to user_attendances_path(@employee), notice: '出勤時刻を登録しました。'
+      redirect_to employee_attendances_path(@employee), notice: '出勤時刻を登録しました。'
     else
       render :new
     end
@@ -41,7 +41,7 @@ class AttendancesController < ApplicationController
   private
 
   def set_employee
-    @employee = Employee.find(params[:employee_id])
+    @employee = Employee.find_by(params[:employee_id])
   end
 
   def set_attendance
@@ -52,8 +52,3 @@ class AttendancesController < ApplicationController
     params.require(:attendance).permit(:status, :worked_on, :note)
   end
 end
-
-<%= link_to "Attendance List", employee_attendances_path(@employee) %>
-
-
-  

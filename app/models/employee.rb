@@ -1,7 +1,7 @@
 class Employee < ApplicationRecord
   has_many :attendances
-  has_many :shifts
-  has_one :salary
+  has_many :shifts, dependent: :destroy
+  has_many :salaries, dependent: :destroy
 
   def calculate_salary(start_date, end_date)
     # 勤怠から労働時間を計算
