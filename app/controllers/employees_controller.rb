@@ -41,7 +41,7 @@ class EmployeesController < ApplicationController
   private
 
   def set_employee
-    @employee = Employee.find(params[:id])
+    @employee = Employee.find_by(params[:id])
   end
 
   def employee_params
