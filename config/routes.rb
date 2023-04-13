@@ -3,6 +3,8 @@ Rails.application.routes.draw do
     resources :attendances
   end
 
+  resources :attendances, only: [:new, :create]
+
   resources :salaries do
     collection do
       post 'calculate_salaries'
