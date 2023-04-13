@@ -44,11 +44,8 @@ class AttendancesController < ApplicationController
     @employee = Employee.find_by(params[:employee_id])
   end
 
-  def set_attendanc
+  def set_attendance
     @attendance = Attendance.find(params[:id])
   end
 
-  def attendance_params
-    params.require(:attendance).permit(:date, :shift_status, :note)
-  end
 end

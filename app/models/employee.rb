@@ -3,6 +3,8 @@ class Employee < ApplicationRecord
   has_many :shifts, dependent: :destroy
   has_many :salaries, dependent: :destroy
 
+  has_secure_password
+
   def calculate_salary(start_date, end_date)
     # 勤怠から労働時間を計算
     worked_hours = attendances.where('date >= ? AND date <= ?', start_date, end_date).sum(:worked_hours)

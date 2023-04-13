@@ -1,7 +1,7 @@
 class Attendance < ApplicationRecord
   belongs_to :employee
 
-  enum attendance_status: { check_in: 1, check_out: 2 }
+  enum attendance_status: { check_in: 1, check_out: 0 }
 
   validates :date, presence: true
   validates :attendance_status, presence: true
