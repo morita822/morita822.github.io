@@ -3,7 +3,7 @@ class AttendancesController < ApplicationController
   before_action :set_attendance, only: [:edit, :update, :approve]
 
   def index
-    @attendances = @employee.attendances.on_this_month.order(:date)
+    @attendance = @employee.attendances.on_this_month.order(:date)
   end
 
   def show
@@ -41,8 +41,9 @@ class AttendancesController < ApplicationController
   private
 
   def set_employee
-    @employee = Employee.find_by(params[:employee_id])
+    @employee = Employee.find_by(id: params[:employee_id])
   end
+
 
   def set_attendance
     @attendance = Attendance.find(params[:id])
